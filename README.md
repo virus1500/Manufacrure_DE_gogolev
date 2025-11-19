@@ -1,0 +1,1 @@
+# Manufacrure_DE_gogolev
