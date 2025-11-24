@@ -69,6 +69,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AppData\Captcha.cs" />
+    <Compile Include="AppData\CaptchaFragment.cs" />
     <Compile Include="Model\Customer.cs">
       <DependentUpon>ManufactureModel.tt</DependentUpon>
     </Compile>
@@ -159,7 +161,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\" />
     <Folder Include="View\Pages\" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,10 @@
       <DependentUpon>ManufactureModel.edmx</DependentUpon>
       <LastGenOutput>ManufactureModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Images\1.png" />
+    <Resource Include="Resources\Images\2.png" />
+    <Resource Include="Resources\Images\3.png" />
+    <Resource Include="Resources\Images\4.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

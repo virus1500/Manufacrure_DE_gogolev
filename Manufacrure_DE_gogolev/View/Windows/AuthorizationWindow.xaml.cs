@@ -39,7 +39,17 @@ namespace Manufacrure_DE_gogolev.View.Windows
                     CaptchaWindow captchaWindow = new CaptchaWindow();
                     if (captchaWindow.ShowDialog() == true)
                     {
-                        //Аутентификация
+                        //Авторизация
+                        if (App.CurrentUser.RoleID == 1)
+                        {
+                            AdministratorWindow administratorWindow = new AdministratorWindow();
+                            administratorWindow.ShowDialog();
+                        }
+                        else
+                        {
+                            UserWindow userWindow = new UserWindow();
+                            userWindow.ShowDialog();
+                        }
                     }
                     else
                     {
