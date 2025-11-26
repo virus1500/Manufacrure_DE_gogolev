@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Manufacrure_DE_gogolev.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace Manufacrure_DE_gogolev.View.Windows
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
+        int failedEntryCount = 0;
         public AuthorizationWindow()
         {
             InitializeComponent();
@@ -39,6 +41,9 @@ namespace Manufacrure_DE_gogolev.View.Windows
                     CaptchaWindow captchaWindow = new CaptchaWindow();
                     if (captchaWindow.ShowDialog() == true)
                     {
+                        if(App.CurrentUser.IsBlocked == false)
+                        {
+
                         //Авторизация
                         if (App.CurrentUser.RoleID == 1)
                         {
@@ -50,15 +55,45 @@ namespace Manufacrure_DE_gogolev.View.Windows
                             UserWindow userWindow = new UserWindow();
                             userWindow.ShowDialog();
                         }
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Учётная запись заблокирована!.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                     else
                     {
-                        //Блокировка
+                    //Блокировка
+                       
                     }
                 }
                 else
                 {
                     //Блокировка
+                    string login = App.context.SystemUser.FirstOrDefault(systemUser => systemUser.Login == LoginTB.Text).Login;
+                    if (string.IsNullOrEmpty(login))
+                    {
+                        MessageBox.Show("Введён неправильный логин и пароль!","Предупреждение", MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        //Подсчёт кол-во неудачных попыток
+                        failedEntryCount++;
+                        MessageBox.Show($"Введён неверный пароль. Осталось попыток:{failedEntryCount} из 3", "Предупреждение",MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                        if (failedEntryCount == 3)
+                        {
+                            MessageBox.Show("Пользователь забрлокирован!","Информация", MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+                            failedEntryCount = 0;
+                            SystemUser userToBlock = App.context.SystemUser.FirstOrDefault(systemUser => systemUser.Login == LoginTB.Text);
+                            userToBlock.IsBlocked = true;
+                            App.context.SaveChanges();
+                        }
+                    }
+
                 }
             }
 

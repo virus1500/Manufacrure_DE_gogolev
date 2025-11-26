@@ -56,7 +56,7 @@ namespace Manufacrure_DE_gogolev.View.Windows
                 else
                 {
                     MessageBox.Show("Вы не прошли");
-                    DialogResult = true;
+                    DialogResult = false;
                 }
             }
         }
