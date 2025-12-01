@@ -23,5 +23,15 @@ namespace Manufacrure_DE_gogolev.View.Windows
         {
             InitializeComponent();
         }
+
+        private void AddUserBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UsersLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
